@@ -25,7 +25,7 @@ void setup () {
 void loop() {   
    int state = digitalRead(pirSensor);   // read if sensor value is "0 or 1"
    
-   if (timer == 60) { // sent signal every 60 seconds       
+   if (timer == 59) { // sent signal every 60 seconds       
     digitalWrite(aliveSignal, HIGH);  // turn LED ON      
     doApiCall("250016Lier", "Alive");   
     //delay(waitTime);       
