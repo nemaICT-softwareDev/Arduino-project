@@ -6,15 +6,15 @@
 #include <WiFiClientSecure.h>
 
 
-const char* ssid = "put here your ssid";             
-const char* password = "put here your password";                
+const char* ssid = "telenet-4BAA48D-2.4Ghz";             
+const char* password = "ah74waneKnyH";                
 
 int motion = D0;                // choose the pin for the LED
-int noMotion = D5;                // choose the pin for the LED
+int aliveSignal = D5;                // choose the pin for the LED
 int pirSensor = D7;               // choose the input pin (for PIR sensor)
-int ledState = LOW;
 const String iot = "250016Lier";
-int timer = 0;                  // to count seconds
+int timer = 0;  // to count seconds
+int waitTime = 1000;
 
 void setup () {    
   Serial.begin(9600);        // initialize serial
@@ -22,33 +22,36 @@ void setup () {
   wifiConnect();
 }
 
-void loop() {
-   
+void loop() {   
    int state = digitalRead(pirSensor);   // read if sensor value is "0 or 1"
    
-   if (timer == 60 || state == 1 ) { // sent wakeywakey signal if sensor reads motion otherwise every 60 seconds 
-    digitalWrite(motion, HIGH);  // turn LED ON   
-    digitalWrite(noMotion, LOW); // turn LED OFF
-    Serial.println("wakeywakey!");
-   // delay(waitTime);
-    doApiCall("250016Lier", "WakeyWakey");
-    state = 0;
-    timer = 0;   
+   if (timer == 60) { // sent signal every 60 seconds       
+    digitalWrite(aliveSignal, HIGH);  // turn LED ON      
+    doApiCall("250016Lier", "Alive");   
+    //delay(waitTime);       
+    timer = 0;       
+   }
+    else if(state == HIGH)//sent wakeywakey signal 
+    {
+       digitalWrite(motion, HIGH);  // turn LED ON   
+       doApiCall("250016Lier", "WakeyWakey");
+       state = 0;           
     }
-   else { // sent alive signal
-      digitalWrite(noMotion, HIGH); // turn LED ON
-      digitalWrite(motion, LOW);  // turn LED OFF     
-      Serial.println("Alive!");
-      doApiCall("250016Lier", "Alive");                
-    }
-    timer+=2;
+//   else { 
+//      digitalWrite(motion, LOW);  // turn LED OFF 
+//    }
+    timer++;
+    delay(1000);
     Serial.println(timer);
+    state = 0;
+    digitalWrite(motion, LOW);  // turn LED OFF   
+    digitalWrite(aliveSignal,LOW); // turn LED OFF 
     
   }
 
 void initPins(){
      pinMode(motion, OUTPUT);      // declare LED as output
-     pinMode(noMotion, OUTPUT);      // declare LED as output
+     pinMode(aliveSignal, OUTPUT);      // declare LED as output
      pinMode(pirSensor, INPUT);     // declare sensor as input   
      pinMode(pirSensor, LOW);       
   }
@@ -96,6 +99,6 @@ void initPins(){
     return;
   }
    http.end();
-   }
-//   delay(10000);
+  }   
+   //delay(10000);
   }
