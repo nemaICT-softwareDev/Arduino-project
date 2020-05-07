@@ -6,8 +6,8 @@
 #include <WiFiClientSecure.h>
 
 
-const char* ssid = "telenet-4BAA48D-2.4Ghz";             
-const char* password = "ah74waneKnyH";                
+const char* ssid = "your wifi code";             
+const char* password = "your password";                
 
 int motion = D0;                // choose the pin for the LED
 int aliveSignal = D5;                // choose the pin for the LED
