@@ -1,4 +1,4 @@
-Sensor Readings (Arduino IDE)
+# Sensor Readings (Arduino IDE)
 
 This is a simple project aim for testing purpose, using MQTT technologie.
 
