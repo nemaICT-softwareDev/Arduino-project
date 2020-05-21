@@ -2,7 +2,7 @@
 
 ### This is a simple project aim for testing purpose, using MQTT technologie.
 
-#### For this project I use:
+#### For this project I utilize:
 * D1 Mini WIFI IoT Development Board Based ESP8266 4MB, 
 * a Mini IR Pyroelectric Infrared PIR Motion Human Body Sensor Detector Module, 
 * 3x Jumper wires, 3x 220R resistor's, 3x Female-to-male Dupont Wire and 2x leds.
