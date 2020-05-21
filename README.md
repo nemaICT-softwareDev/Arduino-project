@@ -9,4 +9,4 @@
  
 #### the Mini IR Pyroelectric Infrared PIR motion sensor is connected to port D7
 #### the red led is connected to port D0 and will light every 60 seconds while senting signal to the broker
-#### the green one is connected to port D5 and will sent signal to the broker every time the PIR motion sensor senses motion with close #### distance.
+#### the green one is connected to port D5 and will sent signal to the broker every time the PIR motion sensor senses motion with close distance.
